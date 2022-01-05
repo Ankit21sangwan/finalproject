@@ -1,0 +1,272 @@
+class Main:
+    def __init__(self):
+        self.food_menu = {}
+        self.User_info= {}
+     
+    def add_food_items(self):
+        val=str(input('Do You want to add food item \nyes/no: '))
+        yes=['y','Y','yes','Yes']
+        while True :
+            if val in yes:
+                food_name = input('Enter the name of the food: ')
+                price = str(input('Enter the price of the food item:'))
+                stock = input('Enter the stock of food: ')
+                quantity = input('Enter the quantity of food item: \n1.ml \n2.gm \n3.pieces')
+                discount = str(input('Enter how many percentage: '))
+                self.id = len(self.food_menu)+1
+                self.food_menu[self.id]={'Food Name':food_name,'Price':price+'Rs.','Quantity':quantity,'Stock':stock,'Discount':discount+'%'}
+                print(self.food_menu)
+                print('Food items are added successfully')
+                val =str(input('Do you want to add food items\nyes/no : '))
+            else:
+                print('Thank You')
+                
+                if val not in yes:
+                    break
+   
+    def edit_food_items(self):
+        #val = input('Do You want to edit the food list : \n1.y \n2.n \nEnter Your choice: ')
+        while True:
+            val = input('Do You want to edit the food list : \ny or n \nEnter Your choice: ')
+            if val == 'y' :
+                var = int(input('1.list of food items \n2.Edit food item  '))
+                if var == 1:
+                    print('Fectching food list')
+                    print('\n',self.food_menu)
+                elif var == 2:
+                    print('Editing food items')
+                    edit = int(input('''1.Edit Food Name \n2.Edit Price \n3.Edit quantity \n4.Edit Stock \n5.Edit Discount
+                    \n6.Edit whole Food item \nWhich one you would like to Edit: '''))
+                    e=int(input('\nEnter the Food ID you want to change the name:'))
+                    print(self.food_menu)
+                    if edit == 1:
+                        print('! Before !','\n',self.food_menu[e])
+                        e1= input('Enter the Food name you want to change:')
+                        self.food_menu[e]['Food Name']=e1
+                        print('$ After $','\n',self.food_menu)
+                    elif edit == 2:
+                        print('! Before !','\n',self.food_menu[e])
+                        e2= input('Enter the Price you want to change:')
+                        self.food_menu[e]['Price']=e2
+                        print('$ After $','\n',self.food_menu)
+                    elif edit == 3:
+                        print('! Before !','\n',self.food_menu[e])
+                        e3= input('Enter the Quantity you want to change:')
+                        self.food_menu[e]['Quantity']=e3
+                        print('$ After $','\n',self.food_menu)
+                    elif edit == 4:
+                        print('! Before !','\n',self.food_menu[e])
+                        e4= input('Enter the Stock you want to change:')
+                        self.food_menu[e]['Stock']=e4
+                        print('$ After $','\n',self.food_menu)
+                    elif edit == 5:
+                        print('! Before !','\n',self.food_menu[e])
+                        e5= input('Enter the Discount you want to change:')
+                        self.food_menu[e]['Discount']=e5
+                        print('$ After $','\n',self.food_menu)
+                    elif edit == 6:
+                        print('! Before !','\n',self.food_menu[e])
+                        a= input('Enter the Food name you want to change:')
+                        b= input('Enter the Price you want to change:')
+                        c= input('Enter the Quantity you want to change:')
+                        d= input('Enter the Stock you want to change:')
+                        e6= input('Enter the Discount you want to change:')
+                        self.food_menu[e]['Food Name']=a
+                        self.food_menu[e]['Price']=b
+                        self.food_menu[e]['Quantity']=c
+                        self.food_menu[e]['Stock']=d
+                        self.food_menu[e]['Discoun']=e6
+                        print('$ After $','\n',self.food_menu)
+            elif val == 'n' :
+                print('Thank You')
+                break
+    
+    def delete_food_items(self):
+        print(self.food_menu)
+        dell = int(input('Enter the Food ID of item you want to DELETE: '))
+        self.food_menu.pop(dell)
+        print('UPDATED FOOD LIST\n',self.food_menu)
+        
+    
+    def list_of_food_items(self):
+            #print('LIST OF FOOD ITESM\n',self.__dict__)
+            for i in self.Food_menu:
+                print("Food Name: ",self.food_menu[i]["Food Name"])
+                print("Quantity : ",self.food_menu[i]["Quantity"])
+                print("Price    : ",self.food_menu[i]["Price"])
+    
+    def sign_Up(self):
+        print("Sign Up on the Application \nEnter your Details : ")
+        Full_Name=str(input("Enter your Full Name :"))
+        Phone_Number=str(input("Enter your Phone Number :"))
+        email=input("Enter your E-mail : ")
+        Address=input("Enter your Address :")
+        Password=input("Enter your Password :")
+        print("\nYou have Signed Up successfully.")
+        self.User_Profile={}
+        self.User_Profile["Name"]=Full_Name
+        self.User_Profile["Mobile Number"]=Phone_Number
+        self.User_Profile["E-Mail"]=email
+        self.User_Profile["Address"]=Address
+        self.User_Profile["Password"]=Password
+        self.User_name=Full_Name+Phone_Number[:4]
+        self.User_info[self.User_name]=self.User_Profile
+        print("User Name: ",self.User_name)
+    
+    
+    def sign_in(self):
+        print("From here you can log in.")
+        Full_Name=input("\nEnter your Name for login : ")
+        Password=input("Enter your passward :")
+        if self.User_Profile["Name"]==Full_Name:
+            if self.User_Profile["Password"]==Password:
+                print("\nlogin successfull")
+            else:
+                print('Wrong Name or Password')
+                Full_Name=input("\nEnter your Name for login : ")
+                Password=input("Enter your passward :")
+    
+    def place_new_order(self):
+
+        food_list=[]
+        self.order=[]
+        for i in self.food_menu:
+            food_list.append(self.food_menu[i])
+        print("\nHere is the food list.")
+        for i in food_list:
+            print(f"{food_list.index(i)+1}. {i['Food Name']} ({i['Quantity']}) [INR {i['Price']}]")
+
+        while True:
+            cho=input("\nIf You want to Place a New Order \nyes\n no:")
+            if cho=="yes":
+                user_input=int(input("\nPlease Enter the Food ID of Food Item :"))
+                print("\nHere is your selected order : ",food_list[(user_input-1)])
+                items=food_list[(user_input-1)]
+                self.order.append(items)
+            elif cho == 'no':
+                break      
+        print("\nHere is your complete items list :",self.order)
+        confirm=(input("\nConfirm the Order :\n 1.yes\n 2.no\n "))
+        if confirm=="yes":
+            print("\nYour order is placed.\nVisit Again ")
+        else:
+            print("\nyour order is canceled.")
+            pass
+        
+    def update_profile(self):
+
+        var=str(input("Do you want to Edit Profile (Y/N): \n"))
+        if var=='y':
+            print("Press 1 to see the Profile \n Press 2 to quit")
+        n=input("Enter your choice:  \n")
+        if n=="1":
+            print("Profile\n",self.User_info)
+            v=str(input("Enter the User Name if want to edit: \n"))
+            for i in self.User_info:
+                j=i
+                while v==j:
+                    k=int(input("""Enter the option which you want to edit\n 1.Name\n 2.Mobile Number\n 3.Mail 
+                                \n 4.Address\n 5.Edit Entire Profile \n 0.exit\n"""))
+                    if k==1:
+                        print("!Before!\n",self.User_info[v])
+                        b=input("Enter the 'NAME' you want to edit: \n")
+                        self.User_info[v]["Name"]=b
+                        print("*After*\n",self.User_info)
+                    elif k==2:
+                        print("!Before!\n",self.User_info[v])
+                        a=input("Enter the 'MOBILE NUMBER' you want to edit: ")
+                        self.User_info[v]["Mobile"]=a
+                        print("*After*\n",self.User_info)
+                    elif k==3:
+                        print("!Before!\n",self.User_info[v])
+                        c=input("Enter the 'MAIL' you want to edit: \n")
+                        self.User_info[v]["Mail"]=c
+                        print("*After*\n",self.User_info)
+                    elif k==4:
+                        print("!Before!\n",self.User_info[v])
+                        d=input("Enter the 'Address' you want to edit: \n")
+                        self.User_info[v]["Address"]=d
+                        print("*After*\n",self.User_info)
+                    elif k==5:
+                        print("!Before!\n",self.User_info[v])
+                        b=input("Enter the 'NAME' you want to edit: \n")
+                        a=input("Enter the 'MOBILE NUMBER' you want to edit: \n")
+                        c=input("Enter the 'MAIL' you want to edit: \n")
+                        d=input("Enter the 'Address' you want to edit: \n")
+                        e=input('Enter the Password You want to edit: \n')
+                        self.User_info[v]["Name"]=b
+                        self.User_info[v]["Mobile Number"]=a
+                        self.User_info[v]["E-Mail"]=c
+                        self.User_info[v]["Address"]=d
+                        self.User_info[v]['Password']=e
+                        print("*After*\n",self.User_info)
+                    elif k==0:
+                        print("Thank You")
+                        break
+        elif n==2:
+            print("Thank You")
+        else:
+            print("Wrong id")
+            v=input("Enter the name id if want to edit: ")
+    
+    def order_history(self):
+        for i in self.order:
+                print(f"{self.order.index(i)+1}. {i['Food Name']} ({i['Quantity']}) [INR {i['Price']}]")        
+a=Main()
+while True:
+    inputt=int(input("""Welcome to 'FeLLoW Multi Cuisine Restaurant' \n1.Admin \n2.Users \n3.Exit \nEnter Your choice: """))
+    if inputt == 1:
+        print('\nLog-in using Admin')
+        while True:
+            z=int(input("""\n1.Add Food items \n2.Edit Food Items\n3.Delete Food Items
+            \n4.List of Food items \n0.Exit Enter to Value: """))
+            if z == 1:
+                a.add_food_items()
+            elif z == 2:
+                a.edit_food_items()
+            elif z == 3:
+                a.delete_food_items()
+            elif z == 4:
+                a.list_of_food_items()
+                z=int(input("""\n1.Add Food items \n2.Edit Food Items\n3.Delete Food Items
+                4.List of Food items \n0.Exit \nEnter to Value: """))
+            elif z==0:
+                    print('Log_out Admin')
+                    break
+    elif inputt ==2:
+        print('\nWelcome User ')
+        while True:
+            user_input=int(input('''Please log-in using \n1.Sign-in('Existing Customer') \n2.Sign-up('New Customer Register')'''))
+            if user_input == 1:
+                print('Sign In')
+                a.sign_in()
+                while True:
+                    use=int(input('Choose the option \n1.Place a New order \n2.Order History \n3.Update Profile \n4.Exit '))
+                    if use == 1:
+                        print('You are ready to Order')
+                        a.place_new_order()
+                    elif use == 2:
+                        print('Your Order History')
+                        a.order_history()
+                    elif use == 3:
+                        print('Update Your Profile')
+                        a.update_profile()
+                    elif use == 4:
+                        print('You Logged Out ')
+                        break
+                break
+            elif user_input == 2:
+                print('Sign Up')
+                a.sign_Up()
+                
+            else:
+                pass
+        else:
+            print('Out of User')
+            break
+        
+    elif inputt == 3:
+        print('\nExit')
+        break
+    else:
+        print('\nRe-enter your choice')
